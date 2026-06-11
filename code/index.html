@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个简洁美观的番茄工作法计时器，帮助你保持专注">
+  <title>番茄钟</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span class="logo-text">番茄钟</span>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn nav-item active" data-view="timer">计时</button>
+      <button class="nav-btn nav-item" data-view="settings">设置</button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <div id="timer-view" class="view active">
+      <div class="timer-section">
+        <div class="card timer-card">
+          <div id="mode-label" class="card-subtitle">专注</div>
+          <div class="timer-wrapper">
+            <svg class="timer-ring" viewBox="0 0 200 200">
+              <circle class="ring-bg" cx="100" cy="100"/>
+              <circle id="ring-progress" class="ring-progress" cx="100" cy="100"
+                      stroke-dasharray="565.48" stroke-dashoffset="0"/>
+            </svg>
+            <span id="timer-text" class="timer-text">25:00</span>
+          </div>
+          <div class="timer-controls">
+            <button id="btn-start" class="btn btn-primary">开始专注</button>
+            <button id="btn-pause" class="btn btn-primary" style="display: none;">暂停</button>
+            <button id="btn-reset" class="btn btn-ghost">重置</button>
+          </div>
+          <div id="completed-info" class="completed-info">已完成 0 个番茄</div>
+        </div>
+
+        <div class="card today-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 class="card-title">今日专注</h3>
+            <span id="today-badge" class="card-badge">0/6</span>
+          </div>
+          <div id="today-count" class="today-count">0 <span>个番茄钟</span></div>
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+          </div>
+          <div id="progress-label" class="progress-label">目标 6 个</div>
+        </div>
+
+        <div class="card week-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 class="card-title">本周专注</h3>
+            <span id="week-total" class="card-badge">本周 0 个</span>
+          </div>
+          <canvas id="week-chart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings-view" class="view">
+      <div class="card settings-container">
+        <h2 class="settings-title">设置</h2>
+
+        <div class="setting-item">
+          <label class="setting-label" for="focus-duration">专注时长（分钟）</label>
+          <input type="number" id="focus-duration" class="setting-input"
+                 min="1" max="180" value="25" placeholder="1-180">
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label" for="break-duration">休息时长（分钟）</label>
+          <input type="number" id="break-duration" class="setting-input"
+                 min="1" max="60" value="5" placeholder="1-60">
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label" for="daily-goal">每日目标（个）</label>
+          <input type="number" id="daily-goal" class="setting-input"
+                 min="1" max="24" value="6" placeholder="1-24">
+        </div>
+
+        <div class="setting-actions">
+          <button id="btn-save" class="btn btn-primary">保存</button>
+        </div>
+
+        <div id="save-status" class="save-status"></div>
+
+        <div class="data-actions">
+          <button id="btn-export" class="btn btn-secondary">导出数据</button>
+          <button id="btn-import" class="btn btn-secondary">导入数据</button>
+          <input type="file" id="import-file" class="import-file-input" accept=".json">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
